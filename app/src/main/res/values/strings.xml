@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">GourmetGuide</string>
+    <string name="welcomeToGourmetGuide">Welcome to Gourmet Guide!</string>
+    <string name="pizzaYes">Yes</string>
+    <string name="pizzaNo">No</string>
+    <string name="pizza">Pizza</string>
+    <string name="burgers">Burgers</string>
+    <string name="burgerYes">Yes</string>
+    <string name="burgerNo">No</string>
+    <string name="italian">Italian</string>
+    <string name="mexican">Mexican</string>
+    <string name="italianYes">Yes</string>
+    <string name="italianNo">No</string>
+    <string name="mexicanYes">Yes</string>
+    <string name="mexicanNo">No</string>
+    <string name="american">American</string>
+    <string name="vegan">Vegan</string>
+    <string name="americanYes">Yes</string>
+    <string name="americanNo">No</string>
+    <string name="veganYes">Yes</string>
+    <string name="veganNo">No</string>
+    <string name="reset">Reset</string>
+    <string name="previous">Previous</string>
+    <string name="heads_or_tails">Heads or Tails</string>
+    <string name="makeYourChoice">Make your choice</string>
+</resources>
