@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-data class Choice(val foodType: String, val liked: Boolean)
+data class Choice(val foodType: String, val liked: Boolean, val checkBoxId: Int)
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         previousButton.setOnClickListener {
-            undoLastChoice(checkboxes)
+            undoLastChoice()
         }
 
         coinFlipButton.setOnClickListener {
@@ -59,21 +59,21 @@ class MainActivity : AppCompatActivity() {
             yesCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     noCheckBox.isChecked = false
-                    addChoice(yesCheckBox.text.toString(), true)
+                    addChoice(yesCheckBox.text.toString(), true, yesCheckBox.id)
                 }
             }
 
             noCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     yesCheckBox.isChecked = false
-                    addChoice(noCheckBox.text.toString(), false)
+                    addChoice(noCheckBox.text.toString(), false, noCheckBox.id)
                 }
             }
         }
     }
 
-    private fun addChoice(foodType: String, liked: Boolean) {
-        val choice = Choice(foodType, liked)
+    private fun addChoice(foodType: String, liked: Boolean, checkBoxId: Int) {
+        val choice = Choice(foodType, liked, checkBoxId)
         choices.add(choice)
         history.add(choice)
     }
@@ -89,17 +89,12 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Choices have been reset.", Toast.LENGTH_SHORT).show()
     }
 
-    private fun undoLastChoice(checkboxes: List<Pair<CheckBox, CheckBox>>) {
+    private fun undoLastChoice() {
         if (history.isNotEmpty()) {
             val lastChoice = history.removeAt(history.size - 1)
             choices.remove(lastChoice)
-            checkboxes.forEach { (yesCheckBox, noCheckBox) ->
-                if (yesCheckBox.text == lastChoice.foodType) {
-                    yesCheckBox.isChecked = false
-                } else if (noCheckBox.text == lastChoice.foodType) {
-                    noCheckBox.isChecked = false
-                }
-            }
+            val checkBox = findViewById<CheckBox>(lastChoice.checkBoxId)
+            checkBox.isChecked = false
             Toast.makeText(this, "Last choice undone.", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "No actions to undo.", Toast.LENGTH_SHORT).show()
